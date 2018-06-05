@@ -8,7 +8,7 @@
 ##############################################################
 
 
-dataset_path = '../datasets/crowdsignals.io/csv-participant-one/'
+dataset_path = '../crowdsignals_dataset/'
 result_dataset_path = './intermediate_datafiles/'
 
 # Import the relevant classes.
