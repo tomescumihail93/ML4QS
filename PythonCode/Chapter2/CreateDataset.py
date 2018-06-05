@@ -19,6 +19,7 @@ import matplotlib.dates as md
 class CreateDataset():
 
     base_dir = ''
+    var = ''
     granulairity = 0
     data_table = None
 
