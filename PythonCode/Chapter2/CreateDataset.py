@@ -20,6 +20,7 @@ class CreateDataset():
 
     base_dir = ''
     var = ''
+    anothervar = ''
     granulairity = 0
     data_table = None
 
