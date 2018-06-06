@@ -42,14 +42,15 @@ for milliseconds_per_instance in granularities:
 
     # We add the accelerometer data (continuous numerical measurements) of the phone and the smartwatch
     # and aggregate the values per timestep by averaging the values/
-    DataSet.add_numerical_dataset('our_dataset_ns.csv', 'accelerometerTimestamp_sinceReboot(s)', ['accelerometerAccelerationX(G)','accelerometerAccelerationY(G)','accelerometerAccelerationZ(G)'], 'avg', 'acc_phone_')
+    DataSet.add_numerical_dataset('acc_custom.csv', 'timestamps', ['x','y','z'], 'avg', 'acc_phone_')
+    # DataSet.add_numerical_dataset('our_dataset_ns.csv', 'accelerometerTimestamp_sinceReboot(s)', ['accelerometerAccelerationX(G)','accelerometerAccelerationY(G)','accelerometerAccelerationZ(G)'], 'avg', 'acc_phone_')
 
     # Line for smartwatch data, unavailable
     # DataSet.add_numerical_dataset('accelerometer_smartwatch.csv', 'timestamps', ['x','y','z'], 'avg', 'acc_watch_')
 
     # We add the gyroscope data (continuous numerical measurements) of the phone and the smartwatch
     # and aggregate the values per timestep by averaging the values/
-    DataSet.add_numerical_dataset('our_dataset_ns.csv', 'gyroTimestamp_sinceReboot(s)', ['gyroRotationX(rad/s)','gyroRotationY(rad/s)','gyroRotationZ(rad/s)'], 'avg', 'gyr_phone_')
+    DataSet.add_numerical_dataset('gyro_custom.csv', 'timestamps', ['x','y','z'], 'avg', 'gyr_phone_')
     
     # DataSet.add_numerical_dataset('gyroscope_smartwatch.csv', 'timestamps', ['x','y','z'], 'avg', 'gyr_watch_')
 
@@ -67,11 +68,11 @@ for milliseconds_per_instance in granularities:
 
     # We add the magnetometer data (continuous numerical measurements) of the phone and the smartwatch
     # and aggregate the values per timestep by averaging the values
-    DataSet.add_numerical_dataset('our_dataset_ns.csv', 'motionTimestamp_sinceReboot(s)', ['motionMagneticFieldX(uT)','motionMagneticFieldY(uT)','motionMagneticFieldZ(uT)'], 'avg', 'mag_phone_')
+    DataSet.add_numerical_dataset('mag_custom.csv', 'timestamps', ['x','y','z'], 'avg', 'mag_phone_')
     #DataSet.add_numerical_dataset('magnetometer_smartwatch.csv', 'timestamps', ['x','y','z'], 'avg', 'mag_watch_')
-
+    DataSet.add_numerical_dataset('press_custom.csv', 'timestamps', ['pressure'], 'avg', 'press_phone_')
     # We add the pressure sensed by the phone (continuous numerical measurements) and aggregate by averaging again
-    DataSet.add_numerical_dataset('our_dataset_ns.csv', 'activityTimestamp_sinceReboot(s)', ['pedometerNumberofSteps(N)'], 'avg', 'pedometer_phone_')
+    DataSet.add_numerical_dataset('pedom_custom.csv', 'timestamps', ['steps', 'distance'], 'avg', 'pedom_phone_')
 
     # Get the resulting pandas data table
 
@@ -82,10 +83,11 @@ for milliseconds_per_instance in granularities:
     DataViz = VisualizeDataset()
 
     # Boxplot
-    DataViz.plot_dataset_boxplot(dataset, ['acc_phone_accelerometerAccelerationX(G)','acc_phone_accelerometerAccelerationY(G)','acc_phone_accelerometerAccelerationZ(G)'])
+    DataViz.plot_dataset_boxplot(dataset, ['acc_phone_x','acc_phone_y','acc_phone_z'])
+    #DataViz.plot_dataset_boxplot(dataset, ['acc_phone_accelerometerAccelerationX(G)','acc_phone_accelerometerAccelerationY(G)','acc_phone_accelerometerAccelerationZ(G)'])
 
     # Plot all data
-    DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'mag_', 'pedometer_phone_'], ['like', 'like', 'like', 'like', 'like', 'like', 'like','like'], ['line', 'line', 'line', 'line', 'line', 'line', 'points', 'points'])
+    DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'mag_', 'press_' ,'pedom_phone_'], ['like', 'like', 'like', 'like', 'like'], ['line', 'line', 'line','line', 'points'])
 
     # And print a summary of the dataset
 
