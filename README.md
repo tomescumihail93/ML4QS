@@ -1,3 +1,21 @@
+# Modifications
+
+## Changes
+
+1. our_ch2.py --> a modified version of crowdsignals_ch2.py to fit our dataset
+2. our_csv_parser --> takes the dataset and splits it up into separate csv files for each sensor
+
+## Workflow
+
+After accepting changes:
+
+* python our_csv_parser.py
+* python our_ch2.py
+
+These commands will make a plot of the data from our dataset, to see the plots from the crowdsignals dataset :
+
+* python crowdsignals_ch2.py
+
 # ML4QS
 
 This repository provides all the code associated with the book titled "Machine Learning for the Quantified Self", authored by Mark Hoogendoorn and Burkhardt Funk and published by Springer in 2017. The website of the book can be found on ml4qs.org
