@@ -21,9 +21,9 @@ acc_dataframe = pd.DataFrame(
         'sensor_type': sensors[0] * DATA_FRAME_SIZE,
         'device_type': device_type * DATA_FRAME_SIZE,
         'timestamps': df['locationTimestamp_since1970(s)'].astype(float)*1000000000,
-        'x': df['accelerometerAccelerationX(G)'],
-        'y': df['accelerometerAccelerationY(G)'],
-        'z': df['accelerometerAccelerationZ(G)']
+        'x': df['accelerometerAccelerationX(G)']*10,
+        'y': df['accelerometerAccelerationY(G)']*10,
+        'z': df['accelerometerAccelerationZ(G)']*10
     }
 )
 
