@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv('../our_dataset/our_dataset_ns.csv')
+df = pd.read_csv('../our_dataset/our_data_last.csv')
 
 TOTAL_SENSORS = 5
 DATA_FRAME_SIZE = len(df)
@@ -42,9 +43,9 @@ mag_dataframe = pd.DataFrame(
         'sensor_type': sensors[2] * DATA_FRAME_SIZE,
         'device_type': device_type * DATA_FRAME_SIZE,
         'timestamps': df['locationTimestamp_since1970(s)'].astype(float)*1000000000,
-        'x': df['motionMagneticFieldX(uT)'],
-        'y': df['motionMagneticFieldY(uT)'],
-        'z': df['motionMagneticFieldZ(uT)']
+        'x': df['motionMagneticFieldX(µT)'],
+        'y': df['motionMagneticFieldY(µT)'],
+        'z': df['motionMagneticFieldZ(µT)']
     }
 )
 
