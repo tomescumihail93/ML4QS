@@ -60,7 +60,7 @@ for milliseconds_per_instance in granularities:
     # We add the labels provided by the users. These are categorical events that might overlap. We add them
     # as binary attributes (i.e. add a one to the attribute representing the specific value for the label if it
     # occurs within an interval).
-    # DataSet.add_event_dataset('our_dataset_ns.csv', 'label_start', 'label_end', 'activity(txt)', 'binary')
+    DataSet.add_event_dataset('labels_custom.csv', 'label_start', 'label_end', 'label', 'binary')
 
     # We add the amount of light sensed by the phone (continuous numerical measurements) and aggregate by averaging again
     # amount of light sensed is missing from our dataset
@@ -87,7 +87,7 @@ for milliseconds_per_instance in granularities:
     #DataViz.plot_dataset_boxplot(dataset, ['acc_phone_accelerometerAccelerationX(G)','acc_phone_accelerometerAccelerationY(G)','acc_phone_accelerometerAccelerationZ(G)'])
 
     # Plot all data
-    DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'mag_', 'press_' ,'pedom_phone_'], ['like', 'like', 'like', 'like', 'like'], ['line', 'line', 'line','line', 'points'])
+    DataViz.plot_dataset(dataset, ['acc_', 'gyr_', 'mag_', 'press_' ,'pedom_phone_', 'label'], ['like', 'like', 'like', 'like', 'like', 'like'], ['line', 'line', 'line','line', 'points', 'points'])
 
     # And print a summary of the dataset
 
