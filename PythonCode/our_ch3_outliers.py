@@ -33,13 +33,22 @@ milliseconds_per_instance = (dataset.index[1] - dataset.index[0]).microseconds/1
 # Step 1: Let us see whether we have some outliers we would prefer to remove.
 
 # Determine the columns we want to experiment on.
-outlier_columns = ['hr_watch_rate']
+outlier_columns = ['acc_phone_x', 'light_phone_lux']
 
 # Create the outlier classes.
 OutlierDistr = DistributionBasedOutlierDetection()
 OutlierDist = DistanceBasedOutlierDetection()
 
-constant = 2
+# Parameters that can be played around with for different outlier detection methods
+# Chauvenet
+constant = 2 # given was 2
+# Mixture models
+NumDist = 3 # given was 3
+# Simple Distance
+dmin = 0.10 # given was 0.10
+fmin = 0.99 # given was 0.99
+# Local outlier factor
+k = 5 # given was 5
 
 #And investigate the approaches for all relevant attributes.
 for col in outlier_columns:
@@ -47,20 +56,20 @@ for col in outlier_columns:
     # of the parameter values for each of the approaches by visual inspection.
     dataset = OutlierDistr.chauvenet(dataset, col, constant)
     DataViz.plot_binary_outliers(dataset, col, col + '_outlier')
-    dataset = OutlierDistr.mixture_model(dataset, col)
+    dataset = OutlierDistr.mixture_model(dataset, col, NumDist)
     DataViz.plot_dataset(dataset, [col, col + '_mixture'], ['exact','exact'], ['line', 'points'])
     # This requires:
     # n_data_points * n_data_points * point_size =
     # 31839 * 31839 * 64 bits = ~8GB available memory
     try:
-        dataset = OutlierDist.simple_distance_based(dataset, [col], 'euclidean', 0.10, 0.99)
+        dataset = OutlierDist.simple_distance_based(dataset, [col], 'euclidean', dmin, fmin)
         DataViz.plot_binary_outliers(dataset, col, 'simple_dist_outlier')
     except MemoryError as e:
         print('Not enough memory available for simple distance-based outlier detection...')
         print('Skipping.')
     
     try:
-        dataset = OutlierDist.local_outlier_factor(dataset, [col], 'euclidean', 5)
+        dataset = OutlierDist.local_outlier_factor(dataset, [col], 'euclidean', k)
         DataViz.plot_dataset(dataset, [col, 'lof'], ['exact','exact'], ['line', 'points'])
     except MemoryError as e:
         print('Not enough memory available for lof...')
