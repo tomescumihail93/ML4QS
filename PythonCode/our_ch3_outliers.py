@@ -33,17 +33,19 @@ milliseconds_per_instance = (dataset.index[1] - dataset.index[0]).microseconds/1
 # Step 1: Let us see whether we have some outliers we would prefer to remove.
 
 # Determine the columns we want to experiment on.
-outlier_columns = ['acc_phone_x', 'light_phone_lux']
+outlier_columns = ['hr_watch_rate']
 
 # Create the outlier classes.
 OutlierDistr = DistributionBasedOutlierDetection()
 OutlierDist = DistanceBasedOutlierDetection()
 
+constant = 2
+
 #And investigate the approaches for all relevant attributes.
 for col in outlier_columns:
     # And try out all different approaches. Note that we have done some optimization
     # of the parameter values for each of the approaches by visual inspection.
-    dataset = OutlierDistr.chauvenet(dataset, col)
+    dataset = OutlierDistr.chauvenet(dataset, col, constant)
     DataViz.plot_binary_outliers(dataset, col, col + '_outlier')
     dataset = OutlierDistr.mixture_model(dataset, col)
     DataViz.plot_dataset(dataset, [col, col + '_mixture'], ['exact','exact'], ['line', 'points'])
@@ -74,7 +76,7 @@ for col in outlier_columns:
 
 for col in [c for c in dataset.columns if not 'label' in c]:
     print('Measurement is now: ' , col)
-    dataset = OutlierDistr.chauvenet(dataset, col)
+    dataset = OutlierDistr.chauvenet(dataset, col, constant)
     dataset.loc[dataset[col + '_outlier'] == True, col] = np.nan
     del dataset[col + '_outlier']
 

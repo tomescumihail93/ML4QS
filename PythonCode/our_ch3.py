@@ -43,7 +43,7 @@ for col in [c for c in dataset.columns if not 'label' in c]:
 
 # Let us try the Kalman filter on the light_phone_lux attribute and study the result.
 
-original_dataset = pd.read_csv(dataset_path + 'chapter2_result.csv', index_col=0)
+original_dataset = pd.read_csv(dataset_path + 'cs_chapter2_result.csv', index_col=0)
 original_dataset.index = original_dataset.index.to_datetime()
 KalFilter = KalmanFilters()
 kalman_dataset = KalFilter.apply_kalman_filter(original_dataset, 'acc_phone_x')
