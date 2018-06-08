@@ -73,7 +73,7 @@ for col in outlier_columns:
 # We take Chauvent's criterion and apply it to all but the label data...
 
 for col in [c for c in dataset.columns if not 'label' in c]:
-    print 'Measurement is now: ' , col
+    print('Measurement is now: ' , col)
     dataset = OutlierDistr.chauvenet(dataset, col)
     dataset.loc[dataset[col + '_outlier'] == True, col] = np.nan
     del dataset[col + '_outlier']
