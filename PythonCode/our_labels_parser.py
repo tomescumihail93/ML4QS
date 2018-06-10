@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import numpy as np
 
-# df = pd.read_csv('../our_dataset/our_data_last.csv')
+df = pd.read_csv('../our_dataset/our_data_last.csv')
 
 # Function that takes the date from the recorded labels
 # searches for that specific date in the big dataset
@@ -18,8 +18,8 @@ with open('our_labels.json') as json_data:
         activity['sensor_type'] = 'interval_label'
         activity['device_type'] = 'smartphone'
         print activity['label']
-        activity['label_start'] = str(df[df['loggingTime(txt)'].str.contains(activity['label_start_datetime'])].iloc[0]['locationTimestamp_since1970(s)'].astype(float)*1000000000)
-        activity['label_end'] = str(df[df['loggingTime(txt)'].str.contains(activity['label_end_date_time'])].iloc[0]['locationTimestamp_since1970(s)'].astype(float)*1000000000)
+        activity['label_start'] = str(df[df['loggingTime(txt)'].str.contains(activity['label_start_datetime'])].iloc[0]['loggingTime(txt)'])
+        activity['label_end'] = str(df[df['loggingTime(txt)'].str.contains(activity['label_end_date_time'])].iloc[0]['loggingTime(txt)'])
     with open('our_labels.json', 'w') as outfile:
         json.dump(d, outfile)
 
